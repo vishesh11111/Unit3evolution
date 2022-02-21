@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container{
+        display: flex;
+      }
+      #sidebar{
+        width: 15%;
+      }
+      #main{
+        width: 85%;
+        height: 600px;
+      }
+      #main img{
+        width: 80%;
+        height: 40%;
+      }
+      #main > div >p:nth-child(2){
+        font-size: 23px;
+        font-weight: bold;
+        color: black;
+        margin-top: 3px;
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--DO NOT CHANGE THIS ID's-->
+
+    <div id="container">
+      <div id="sidebar">
+        <!--add your sidebar component here-->
+      </div>
+
+      <div id="main">
+        <!--DO NOT CHANGE THIS ID's-->
+        <!--Show the clicked article in detailed format here ONLY-->
+      </div>
+    </div>
+  </body>
+</html>
+<script type="module">
+  import sidebar from "../components/sidebar.js"
+  document.getElementById("sidebar").innerHTML=sidebar();
+let data = JSON.parse(localStorage.getItem("click"));
+console.log(data);
+data.forEach(element => {
+  let div = document.createElement("div");
+
+  let im= document.createElement("img");
+  im.src= element.urlToImage;
+
+  let na = document.createElement("p");
+  na.innerHTML= element.source.name;
+
+  let publ = document.createElement("p");
+  publ.innerHTML= element.publishedAt;
+
+  let cont = document.createElement("p");
+  cont.innerHTML=element.content;
+
+  let k = document.querySelector("#main");
+
+  div.append(im,na,publ,cont);
+  k.append(div);
+});
+
+</script>
